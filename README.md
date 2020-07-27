@@ -21,9 +21,13 @@ O passo a passo a seguir te fala como fazer uma cena simples usando um Animation
   - Fps: Escreva nesse campo quantos quadros por segundo terá a sua animação depois de renderizada.
 - Hora de gravar! Rode a cena apertando F6, ou clicando no ícone de claquete com botão de play no canto superior direito do editor do Godot.
 - Quando a janela aparecer, aperte **duas vezes** no seu teclado o botão HOME para começar a gravação.
+  - Se quiser abortar a gravação ou a renderização a qualquer momento, **segure** o botão END no seu teclado.
   - A gravação começará e terminará automaticamente, e os frames serão salvos como uma sequência de imagens na pasta do projeto.
   - Recomendo redimensionar a janela enquanto estiver gravando para ver o output no editor do Godot, e saber quantos frames já foram salvos e em que pasta eles estão.
-- Se quiser abortar a gravação ou a renderização a qualquer momento, **segure** o botão END no seu teclado.
+- Você verá no output da engine quando a renderização for concluída.
+- Para juntar todos os frames renderizados, vá para a pasta escrita no output da engine e copie todos os frames. Cole em outra pasta à qual você tenha acesso.
+- Abra um editor de vídeo como o [Kdenlive](https://kdenlive.org/en/) e importe todos os frames como uma sequência de imagens.
+- Renderize o seu vídeo!
 
 ## Scripting
 
