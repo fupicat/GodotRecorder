@@ -75,4 +75,8 @@ Apenas copie esse template, cole em um novo script e atache esse script a um nod
 
 Esse projeto está muito no início ainda e eu não sei o que é possível e impossível de gravar com ele. Se encontrar qualquer bug no projeto, me avise! Mand um email para fupicat arroba gmail ponto com.
 
-As próximas atualizações desse programa terão novos script pré-feitos, e eu vou tentar pedir uma ajuda para corrigir o bug que você precisa apertar duas vezes a tecla HOME. Não sei o que aconteceu ali mas deixei por enquanto porque não atrapalha muito
+As próximas atualizações desse programa terão novos script pré-feitos, e eu vou tentar pedir uma ajuda para corrigir o bug que você precisa apertar duas vezes a tecla HOME. Não sei o que aconteceu ali mas deixei por enquanto porque não atrapalha muito.
+
+## Licença
+
+[CC0](https://creativecommons.org/publicdomain/zero/1.0/) Eu n ligo
