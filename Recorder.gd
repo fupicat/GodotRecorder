@@ -128,16 +128,16 @@ func save_all():
     # Salve todos os frames.
     var i = 0
     for frm in frames:
-        print('Saving frame ' + get_frame_name(i) + '...')
+        print('Salvando frame ' + get_frame_name(i) + '...')
         yield(get_tree(), "idle_frame")
         yield(get_tree(), "idle_frame")
         
         # Segure END para abortar o processo de salvamento.
         if Input.is_action_pressed("ui_end"):
-            print('Saving aborted!')
+            print('Salvamento abortado!')
             get_tree().reload_current_scene()
             return
         frm.save_png('user://Frame' + get_frame_name(i) + '.png')
         i += 1
-    print('Finished! Files saved at ' + OS.get_user_data_dir())
+    print('Pronto! Arquivos salvos em ' + OS.get_user_data_dir())
     get_tree().reload_current_scene()
