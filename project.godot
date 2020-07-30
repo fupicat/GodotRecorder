@@ -17,7 +17,6 @@ _global_script_class_icons={
 
 config/name="GodotRecorder"
 config/description="Record animations in the Godot viewport at 60fps."
-run/main_scene="res://Tests/VideoPlayer/VideoPlayer.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="GodotRecorder"
 config/icon="res://icon.png"
@@ -31,5 +30,5 @@ window/stretch/aspect="keep"
 
 [rendering]
 
-environment/default_clear_color=Color( 0, 1, 0, 1 )
+environment/default_clear_color=Color( 0.615686, 0.392157, 0.941176, 1 )
 environment/default_environment="res://default_env.tres"

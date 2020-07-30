@@ -8,6 +8,7 @@ extends Node
 signal recording_tick
 signal recording_start
 signal frame_done
+signal save_done
 
 export var record_for_secs = 1.0
 export var fps = 60
@@ -15,8 +16,11 @@ export var fps = 60
 var recordthis = 0
 var done = 0
 var recording = false
+var start_frame = 0
 var frame = 0
 var frames = []
+
+onready var last_frame = record_for_secs * 60
 
 # Conte o número de objetos que mudam a cada tick.
 func _ready():
@@ -49,10 +53,16 @@ func _process(_delta):
     # Tire uma print, adicione-a à lista de frames e aumente o frame atual.
     frames.append(take_screenshot())
     frame += 1
+    if frame % 60 == 0:
+        save_all(false)
+        recording = false
+        yield(self, "save_done")
+        start_frame = frame
+        recording = true
     
     # Se a gravação tiver chegado ao limite de segundos dado pelo usuário,
     # pare de gravar.
-    if frame >= record_for_secs * 60:
+    if frame >= last_frame:
         stop_recording()
 
 # Executado por sinais em outros objetos. Se o número de objetos que
@@ -93,6 +103,7 @@ func start_recording():
     
     # Resete o frame atual, a lista de frames e quantos objetos terminaram
     # execução.
+    start_frame = 0
     frame = 0
     frames = []
     done = 0
@@ -109,7 +120,7 @@ func take_screenshot():
 
 # Reporte o número do frame com o número apropriado de zeros antes dele.
 func get_frame_name(framen):
-    var how_many_zeros = len(str(frame)) - len(str(framen))
+    var how_many_zeros = len(str(last_frame)) - len(str(framen))
     assert(how_many_zeros >= 0)
     var numstr = ''
     for _i in range(how_many_zeros):
@@ -118,15 +129,18 @@ func get_frame_name(framen):
     return numstr
 
 # Salva todos os frames.
-func save_all():
-    print('Fim da gravação! Salvando frames...')
+func save_all(quit = true):
+    if quit:
+        print('Fim da gravação! Salvando frames...')
+    else:
+        print('Salvando frames... Gravação continuará em instantes.')
     
     # Espere por um frame só para que a mensagem apareça.
     yield(get_tree(), "idle_frame")
     yield(get_tree(), "idle_frame")
     
     # Salve todos os frames.
-    var i = 0
+    var i = start_frame
     for frm in frames:
         print('Salvando frame ' + get_frame_name(i) + '...')
         yield(get_tree(), "idle_frame")
@@ -134,10 +148,17 @@ func save_all():
         
         # Segure END para abortar o processo de salvamento.
         if Input.is_action_pressed("ui_end"):
-            print('Salvamento abortado!')
-            get_tree().reload_current_scene()
+            print('Abortado!')
+            var _err = get_tree().reload_current_scene()
             return
         frm.save_png('user://Frame' + get_frame_name(i) + '.png')
         i += 1
-    print('Pronto! Arquivos salvos em ' + OS.get_user_data_dir())
-    get_tree().reload_current_scene()
+    var user = OS.get_user_data_dir()
+    if quit:
+        print('Pronto! Arquivos salvos em ' + user)
+    else:
+        print('Arquivos salvos em ' + user + '. Continuando gravação...')
+    emit_signal("save_done")
+    frames = []
+    if quit:
+        var _err = get_tree().reload_current_scene()
